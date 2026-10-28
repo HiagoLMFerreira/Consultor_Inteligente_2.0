@@ -1,0 +1,237 @@
+{
+  "versao": "2.0",
+  "descricao": "Base inicial de afinidades para o consultor de carreiras. Pesos heurísticos educacionais, não validados cientificamente.",
+  "escala": {
+    "minimo": 1,
+    "maximo": 5,
+    "rotulos": {
+      "1": "Nenhuma afinidade",
+      "2": "Pouca afinidade",
+      "3": "Afinidade moderada",
+      "4": "Boa afinidade",
+      "5": "Muita afinidade"
+    }
+  },
+  "perguntas": [
+    {
+      "id": "logica",
+      "texto": "Qual seu nível de afinidade com lógica e resolução de problemas?"
+    },
+    {
+      "id": "programacao",
+      "texto": "Quanto você gosta de desenvolver programas e escrever código?"
+    },
+    {
+      "id": "matematica",
+      "texto": "Qual seu nível de afinidade com matemática e estatística?"
+    },
+    {
+      "id": "design",
+      "texto": "Quanto você gosta de criar interfaces e pensar na experiência do usuário?"
+    },
+    {
+      "id": "dados",
+      "texto": "Quanto você gosta de analisar e organizar dados?"
+    },
+    {
+      "id": "seguranca",
+      "texto": "Quanto você se interessa por proteção de sistemas e informações?"
+    },
+    {
+      "id": "infraestrutura",
+      "texto": "Quanto você gosta de servidores, redes e infraestrutura?"
+    },
+    {
+      "id": "automacao",
+      "texto": "Quanto você se interessa por automação de processos e tarefas?"
+    },
+    {
+      "id": "testes",
+      "texto": "Quanto você gosta de encontrar erros e melhorar a qualidade de sistemas?"
+    },
+    {
+      "id": "gestao",
+      "texto": "Quanto você gosta de planejar produtos, definir prioridades e trabalhar com equipes?"
+    },
+    {
+      "id": "mobile",
+      "texto": "Quanto você se interessa pelo desenvolvimento de aplicativos para celular?"
+    },
+    {
+      "id": "nuvem",
+      "texto": "Quanto você se interessa por serviços e arquitetura em nuvem?"
+    }
+  ],
+  "carreiras": {
+    "backend": {
+      "nome": "Desenvolvimento Back-end",
+      "pesos": {
+        "logica": 5,
+        "programacao": 5,
+        "matematica": 2,
+        "design": 1,
+        "dados": 3,
+        "seguranca": 2,
+        "infraestrutura": 2,
+        "automacao": 3,
+        "testes": 3,
+        "gestao": 1,
+        "mobile": 1,
+        "nuvem": 2
+      }
+    },
+    "frontend": {
+      "nome": "Desenvolvimento Front-end & UI/UX",
+      "pesos": {
+        "logica": 3,
+        "programacao": 5,
+        "matematica": 1,
+        "design": 5,
+        "dados": 1,
+        "seguranca": 1,
+        "infraestrutura": 1,
+        "automacao": 2,
+        "testes": 3,
+        "gestao": 2,
+        "mobile": 2,
+        "nuvem": 1
+      }
+    },
+    "ciencia": {
+      "nome": "Ciência de Dados e Machine Learning",
+      "pesos": {
+        "logica": 4,
+        "programacao": 4,
+        "matematica": 5,
+        "design": 1,
+        "dados": 5,
+        "seguranca": 1,
+        "infraestrutura": 2,
+        "automacao": 2,
+        "testes": 2,
+        "gestao": 1,
+        "mobile": 1,
+        "nuvem": 2
+      }
+    },
+    "engenharia": {
+      "nome": "Engenharia de Dados",
+      "pesos": {
+        "logica": 4,
+        "programacao": 4,
+        "matematica": 4,
+        "design": 1,
+        "dados": 5,
+        "seguranca": 2,
+        "infraestrutura": 4,
+        "automacao": 4,
+        "testes": 3,
+        "gestao": 1,
+        "mobile": 1,
+        "nuvem": 3
+      }
+    },
+    "seguranca": {
+      "nome": "Cibersegurança",
+      "pesos": {
+        "logica": 5,
+        "programacao": 3,
+        "matematica": 3,
+        "design": 1,
+        "dados": 3,
+        "seguranca": 5,
+        "infraestrutura": 5,
+        "automacao": 3,
+        "testes": 4,
+        "gestao": 2,
+        "mobile": 1,
+        "nuvem": 3
+      }
+    },
+    "devops": {
+      "nome": "DevOps & SRE",
+      "pesos": {
+        "logica": 4,
+        "programacao": 4,
+        "matematica": 2,
+        "design": 1,
+        "dados": 2,
+        "seguranca": 3,
+        "infraestrutura": 5,
+        "automacao": 5,
+        "testes": 4,
+        "gestao": 2,
+        "mobile": 1,
+        "nuvem": 4
+      }
+    },
+    "cloud": {
+      "nome": "Computação em Nuvem",
+      "pesos": {
+        "logica": 4,
+        "programacao": 3,
+        "matematica": 2,
+        "design": 1,
+        "dados": 2,
+        "seguranca": 4,
+        "infraestrutura": 5,
+        "automacao": 4,
+        "testes": 3,
+        "gestao": 2,
+        "mobile": 1,
+        "nuvem": 5
+      }
+    },
+    "mobile": {
+      "nome": "Desenvolvimento Mobile",
+      "pesos": {
+        "logica": 4,
+        "programacao": 5,
+        "matematica": 2,
+        "design": 4,
+        "dados": 2,
+        "seguranca": 2,
+        "infraestrutura": 1,
+        "automacao": 2,
+        "testes": 3,
+        "gestao": 1,
+        "mobile": 5,
+        "nuvem": 2
+      }
+    },
+    "qa": {
+      "nome": "Engenharia de Qualidade e Testes (QA)",
+      "pesos": {
+        "logica": 4,
+        "programacao": 4,
+        "matematica": 2,
+        "design": 2,
+        "dados": 3,
+        "seguranca": 3,
+        "infraestrutura": 2,
+        "automacao": 4,
+        "testes": 5,
+        "gestao": 2,
+        "mobile": 2,
+        "nuvem": 2
+      }
+    },
+    "produto": {
+      "nome": "Gestão de Produtos",
+      "pesos": {
+        "logica": 3,
+        "programacao": 2,
+        "matematica": 2,
+        "design": 4,
+        "dados": 3,
+        "seguranca": 1,
+        "infraestrutura": 1,
+        "automacao": 2,
+        "testes": 3,
+        "gestao": 5,
+        "mobile": 2,
+        "nuvem": 2
+      }
+    }
+  }
+}
