@@ -38,14 +38,45 @@ def carregar_base_conhecimento():
     return dados
 
 def validar_base_conhecimento(base):
-    if "perguntas" not in base:
+    perguntas = base.get("perguntas", [])
+    carreiras = base.get("carreiras", {})
+
+    if not perguntas:
         raise ValueError("A base não possui perguntas.")
 
-    if "carreiras" not in base:
-        raise ValueError("A base não possui carreiras.")
-
-    if len(base["carreiras"]) != 10:
+    if len(carreiras) != 10:
         raise ValueError("A base deve conter 10 carreiras.")
+
+    ids_perguntas = [pergunta["id"] for pergunta in perguntas]
+
+    if len(ids_perguntas) != len(set(ids_perguntas)):
+        raise ValueError("Existem perguntas com identificadores repetidos.")
+
+    for codigo, carreira in carreiras.items():
+        pesos = carreira.get("pesos", {})
+
+        if set(pesos) != set(ids_perguntas):
+            raise ValueError(
+                f"A carreira {codigo} possui pesos incompletos."
+            )
+
+        for peso in pesos.values():
+            if type(peso) is not int or not 1 <= peso <= 5:
+                raise ValueError(
+                    f"A carreira {codigo} possui um peso inválido."
+                )
+
+    nomes = base.get("nomes_caracteristicas", {})
+
+    if set(nomes) != set(ids_perguntas):
+        raise ValueError("Os nomes das características estão incompletos.")
+
+    penalidades = base.get("penalidades", {})
+
+    for regras in penalidades.values():
+        for valor in regras.values():
+            if type(valor) not in (int, float) or valor < 0:
+                raise ValueError("Existe uma penalidade inválida.")
 
     print("Base de conhecimento validada com sucesso!")
 

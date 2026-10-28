@@ -233,5 +233,29 @@
         "nuvem": 2
       }
     }
+  },
+  "penalidades": {
+    "5": {
+      "1": 5,
+      "2": 2
+    },
+    "4": {
+      "1": 3,
+      "2": 1
+    }
+  },
+  "nomes_caracteristicas": {
+    "logica": "Raciocínio lógico",
+    "programacao": "Programação",
+    "matematica": "Matemática e estatística",
+    "design": "Design e interfaces",
+    "dados": "Análise de dados",
+    "seguranca": "Segurança da informação",
+    "infraestrutura": "Infraestrutura e servidores",
+    "automacao": "Automação de processos",
+    "testes": "Testes e qualidade",
+    "gestao": "Gestão de projetos e produtos",
+    "mobile": "Desenvolvimento mobile",
+    "nuvem": "Computação em nuvem"
   }
 }
