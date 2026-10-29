@@ -1,172 +1,186 @@
-"""Entrega 4: validação automática de 10 carreiras e cenários de borda.
 
-Execute: python testes.py
-O arquivo relatorio_testes.md só é criado quando todos os testes passam.
-"""
-from collections import Counter
-from pathlib import Path
 import unittest
 
-from conhecimento import CARREIRAS
-from motor_inferencia import analisar_respostas
-
-# Um conjunto completo de respostas válidas, usado como ponto de partida.
-BASE = dict(
-    matematica='media', atividade='apis', ferramenta='java', entrega='sistema',
-    ambiente='programacao', resolver='codigo', estudo='apis',
-    programacao='gosto', aspecto='logica', objetivo='sistemas'
-)
-
-# Cada persona foi montada para ativar TODAS as regras de sua carreira.
-# Estes são cenários elaborados para validar a lógica, não perfis reais de pessoas.
-PERSONAS = [
-    ('Back-end', 'backend', dict(BASE), {'R01','R02'}),
-    ('Front-end', 'frontend', dict(BASE, atividade='interfaces', ferramenta='javascript',
-        entrega='interface', ambiente='design', resolver='usuario', estudo='interfaces',
-        aspecto='usabilidade', objetivo='experiencias'), {'R03','R04'}),
-    ('Ciência de Dados', 'ciencia', dict(BASE, matematica='alta', atividade='modelos',
-        ferramenta='python', entrega='previsoes', ambiente='analise', resolver='padroes',
-        estudo='machine_learning', aspecto='inteligencia', objetivo='ia'), {'R05','R06','R07'}),
-    ('Engenharia de Dados', 'engenharia', dict(BASE, atividade='pipelines',
-        ferramenta='sql', entrega='dados', ambiente='dados', resolver='fluxos',
-        estudo='etl', aspecto='dados', objetivo='dados'), {'R08','R09'}),
-    ('Cibersegurança', 'seguranca', dict(BASE, atividade='seguranca', ferramenta='linux',
-        entrega='protecao', ambiente='seguranca', resolver='riscos',
-        estudo='criptografia', aspecto='protecao', objetivo='seguranca'), {'R10','R11','R12'}),
-    ('DevOps e SRE', 'devops', dict(BASE, atividade='automacao', ferramenta='docker',
-        entrega='automacao', ambiente='servidores', resolver='automatizar',
-        estudo='cicd', aspecto='operacao', objetivo='automacao'), {'R13','R14','R15'}),
-    ('Computação em Nuvem', 'cloud', dict(BASE, atividade='nuvem', ferramenta='cloud',
-        entrega='escalabilidade', ambiente='nuvem', resolver='arquitetura',
-        estudo='cloud', aspecto='nuvem', objetivo='nuvem'), {'R16','R17'}),
-    ('Desenvolvimento Mobile', 'mobile', dict(BASE, atividade='mobile', ferramenta='flutter',
-        entrega='aplicativo', ambiente='mobile', resolver='apps',
-        estudo='mobile', aspecto='mobile', objetivo='aplicativos'), {'R18','R19'}),
-    ('Qualidade e Testes', 'qa', dict(BASE, atividade='testes', ferramenta='testes',
-        entrega='qualidade', ambiente='testes', resolver='erros',
-        estudo='testes', aspecto='qualidade', objetivo='qualidade'), {'R20','R21','R22'}),
-    ('Gestão de Produtos', 'produto', dict(BASE, atividade='produto', ferramenta='gestao',
-        entrega='produto', ambiente='negocios', resolver='prioridades',
-        estudo='agil', aspecto='estrategia', objetivo='produtos'), {'R23','R24','R25'}),
-]
+from conhecimento import carregar_base_conhecimento
+from motor_ponderado import calcular_compatibilidade
+from recomendacoes import analisar_competencias, gerar_roadmap
 
 
-def ids_dos_motivos(resultado):
-    """Extrai identificadores R01...R25 das justificativas retornadas."""
-    return {texto.split(':', 1)[0] for texto in resultado['motivos']}
+class TestesConsultorV2(unittest.TestCase):
 
+    def setUp(self):
+        # Carrega os dados antes de cada teste
+        self.base = carregar_base_conhecimento()
 
-class TesteConsultor(unittest.TestCase):
-    def test_01_todas_as_dez_personas(self):
-        for nome, codigo, respostas, regras_esperadas in PERSONAS:
-            with self.subTest(persona=nome):
-                resultado = analisar_respostas(respostas)
-                self.assertEqual(resultado['codigo'], codigo)
-                self.assertEqual(resultado['carreira'], CARREIRAS[codigo])
-                self.assertEqual(ids_dos_motivos(resultado), regras_esperadas)
-                self.assertEqual(resultado['pontuacoes'][codigo], 3 * len(regras_esperadas))
-                self.assertFalse(resultado['empate'])
-                self.assertEqual(len(resultado['pontuacoes']), 10)
+        self.perguntas = [
+            pergunta["id"]
+            for pergunta in self.base["perguntas"]
+        ]
 
-    def test_02_cobertura_das_25_regras(self):
-        ativadas = set()
-        for _, _, respostas, _ in PERSONAS:
-            ativadas.update(ids_dos_motivos(analisar_respostas(respostas)))
-        esperadas = {f'R{i:02}' for i in range(1, 26)}
-        self.assertEqual(ativadas, esperadas)
+    def criar_perfil(self, valor=3):
+        # Cria um perfil com a mesma resposta para todas as perguntas
+        return {
+            pergunta: valor
+            for pergunta in self.perguntas
+        }
 
-    def test_03_desempate_usando_objetivo_profissional(self):
-        # R01 -> backend e R14 -> devops (ambos com 3 pontos).
-        respostas = dict(BASE, ferramenta='docker', estudo='cicd', objetivo='automacao')
-        resultado = analisar_respostas(respostas)
-        self.assertTrue(resultado['empate'])
-        self.assertEqual(resultado['codigo'], 'devops')
-        self.assertEqual(resultado['pontuacoes']['backend'], 3)
-        self.assertEqual(resultado['pontuacoes']['devops'], 3)
-        self.assertEqual(set(resultado['empatadas']),
-                         {CARREIRAS['backend'], CARREIRAS['devops']})
-        self.assertEqual(ids_dos_motivos(resultado), {'R14'})
+    def test_01_ranking_completo(self):
+        respostas = self.criar_perfil()
+        resultados = calcular_compatibilidade(respostas)
 
-    def test_04_desempate_fallback_estavel(self):
-        respostas = dict(BASE, ferramenta='docker', estudo='cicd', objetivo='produtos')
-        resultado = analisar_respostas(respostas)
-        self.assertTrue(resultado['empate'])
-        self.assertEqual(resultado['codigo'], 'backend')
+        self.assertEqual(len(resultados), 10)
 
-    def test_05_sem_regras_acionadas(self):
-        respostas = dict(BASE, matematica='baixa', ferramenta='nenhuma',
-            entrega='produto', ambiente='analise', resolver='fluxos',
-            estudo='cloud', programacao='iniciante', aspecto='mobile', objetivo='produtos')
-        resultado = analisar_respostas(respostas)
-        self.assertIsNone(resultado['carreira'])
-        self.assertFalse(resultado['motivos'])
-        self.assertEqual(sum(resultado['pontuacoes'].values()), 0)
-        self.assertFalse(resultado['empate'])
+        codigos = [item["codigo"] for item in resultados]
 
-    def test_06_resposta_ausente(self):
-        respostas = dict(BASE)
-        del respostas['matematica']
+        self.assertEqual(len(set(codigos)), 10)
+
+    def test_02_percentuais_validos(self):
+        respostas = self.criar_perfil(4)
+        resultados = calcular_compatibilidade(respostas)
+
+        percentuais = [
+            item["compatibilidade"]
+            for item in resultados
+        ]
+
+        for percentual in percentuais:
+            self.assertGreaterEqual(percentual, 0)
+            self.assertLessEqual(percentual, 100)
+
+        self.assertEqual(
+            percentuais,
+            sorted(percentuais, reverse=True)
+        )
+
+    def test_03_afinidade_maxima(self):
+        respostas = self.criar_perfil(5)
+        resultados = calcular_compatibilidade(respostas)
+
+        for resultado in resultados:
+            self.assertAlmostEqual(
+                resultado["compatibilidade"], 100
+            )
+            self.assertEqual(resultado["penalidade"], 0)
+
+    def test_04_afinidade_minima(self):
+        respostas = self.criar_perfil(1)
+        resultados = calcular_compatibilidade(respostas)
+
+        for resultado in resultados:
+            self.assertEqual(
+                resultado["compatibilidade"], 0
+            )
+
+    def test_05_perfil_ambiguo(self):
+        # Perfil com interesse moderado em todas as áreas
+        respostas = self.criar_perfil(3)
+        resultados = calcular_compatibilidade(respostas)
+
+        for resultado in resultados:
+            self.assertAlmostEqual(
+                resultado["compatibilidade"], 50
+            )
+
+        # Verifica se os resultados empatados aparecem
+        self.assertEqual(len(resultados), 10)
+
+    def test_06_penalidades(self):
+        respostas = self.criar_perfil(5)
+
+        # Baixa afinidade com programação
+        respostas["programacao"] = 1
+
+        resultados = calcular_compatibilidade(respostas)
+
+        backend = next(
+            item for item in resultados
+            if item["codigo"] == "backend"
+        )
+
+        self.assertEqual(backend["penalidade"], 5)
+
+        self.assertIn(
+            "Programação",
+            backend["pontos_atencao"]
+        )
+
+        self.assertLess(
+            backend["compatibilidade"], 100
+        )
+
+    def test_07_respostas_invalidas(self):
+        respostas = self.criar_perfil()
+
+        respostas["logica"] = 6
+
         with self.assertRaises(ValueError):
-            analisar_respostas(respostas)
+            calcular_compatibilidade(respostas)
 
-    def test_07_resposta_invalida(self):
+        respostas = self.criar_perfil()
+        del respostas["logica"]
+
         with self.assertRaises(ValueError):
-            analisar_respostas(dict(BASE, matematica='muito_alta'))
+            calcular_compatibilidade(respostas)
 
-    def test_08_campo_extra(self):
-        with self.assertRaises(ValueError):
-            analisar_respostas(dict(BASE, idade='20'))
+    def test_08_roadmaps(self):
+        # Percorre todas as carreiras do JSON
+        for codigo, carreira in self.base["carreiras"].items():
 
-    def test_09_chamadas_independentes(self):
-        primeiro = analisar_respostas(PERSONAS[0][2])
-        segundo = analisar_respostas(PERSONAS[1][2])
-        terceiro = analisar_respostas(PERSONAS[0][2])
-        self.assertEqual(primeiro['pontuacoes'], terceiro['pontuacoes'])
-        self.assertEqual(primeiro['motivos'], terceiro['motivos'])
-        self.assertNotEqual(primeiro['codigo'], segundo['codigo'])
+            with self.subTest(carreira=codigo):
+                competencias = carreira["competencias_junior"]
+
+                conhecimentos = {
+                    chave: 1
+                    for chave in competencias
+                }
+
+                analise = analisar_competencias(
+                    codigo, conhecimentos
+                )
+
+                plano = gerar_roadmap(
+                    codigo, conhecimentos
+                )
+
+                self.assertEqual(
+                    len(analise),
+                    len(competencias)
+                )
+
+                self.assertIn("estudos", plano)
+                self.assertIn("certificacoes", plano)
+                self.assertIn("projetos", plano)
+
+                for item in analise:
+                    self.assertGreaterEqual(
+                        item["lacuna"], 0
+                    )
+
+                # Verifica também um usuário com nível máximo
+                conhecimentos_maximos = {
+                    chave: 5
+                    for chave in competencias
+                }
+
+                analise_maxima = analisar_competencias(
+                    codigo, conhecimentos_maximos
+                )
+
+                plano_maximo = gerar_roadmap(
+                    codigo, conhecimentos_maximos
+                )
+
+                self.assertTrue(
+                    all(
+                        item["lacuna"] == 0
+                        for item in analise_maxima
+                    )
+                )
+
+                self.assertEqual(
+                    len(plano_maximo["estudos"]), 0
+                )
 
 
-def salvar_relatorio():
-    linhas = [
-        '# Relatório de validação — Entrega 4', '',
-        'Este documento registra cenários automatizados de teste elaborados para o projeto.',
-        'Não constitui uma pesquisa com profissionais reais ou uma validação científica de orientação de carreira.', '',
-        '## Personas testadas', '',
-        '| Persona | Carreira esperada | Carreira obtida | Regras ativadas | Situação |',
-        '|---|---|---|---|---|',
-    ]
-    contagem = Counter()
-    for nome, esperado, respostas, _ in PERSONAS:
-        resultado = analisar_respostas(respostas)
-        regras = sorted(ids_dos_motivos(resultado))
-        contagem.update(regras)
-        status = 'APROVADO' if resultado['codigo'] == esperado else 'REPROVADO'
-        linhas.append(f'| {nome} | {CARREIRAS[esperado]} | '
-                      f'{resultado["carreira"]} | {", ".join(regras)} | {status} |')
-    linhas += ['', '## Cobertura de regras', '',
-        f'{len(contagem)} de 25 regras acionadas pelas dez personas.', '',
-        '## Testes adicionais', '',
-        '- Desempate pelo objetivo profissional',
-        '- Desempate sem objetivo correspondente (prioridade fixa da implementação)',
-        '- Perfil inconclusivo sem regras acionadas',
-        '- Resposta ausente, resposta inválida e campo inesperado',
-        '- Independência entre execuções consecutivas', '',
-        '**Resultado:** todos os testes automatizados passaram na execução que gerou este relatório.', '',
-        '### Limites da validação', '',
-        'Estes testes confirmam o comportamento do código nos casos definidos, '
-        'não a qualidade de recomendações para todos os usuários. '
-        'Ainda é útil fazer testes manuais na interface Streamlit.', ''
-    ]
-    Path(__file__).with_name('relatorio_testes.md').write_text('\n'.join(linhas), encoding='utf-8')
-
-
-if __name__ == '__main__':
-    suite = unittest.defaultTestLoader.loadTestsFromTestCase(TesteConsultor)
-    result = unittest.TextTestRunner(verbosity=2).run(suite)
-    if result.wasSuccessful():
-        salvar_relatorio()
-        print('\n[OK] Todas as 10 carreiras e as 25 regras foram cobertas.')
-        print('[OK] Relatório gerado: relatorio_testes.md')
-    else:
-        print('\n[ERRO] Testes falharam; corrija antes da Entrega 5.')
-        raise SystemExit(1)
+if __name__ == "__main__":
+    unittest.main(verbosity=2)
