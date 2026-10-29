@@ -68,8 +68,14 @@ def validar_base_conhecimento(base):
 
     nomes = base.get("nomes_caracteristicas", {})
 
-    if set(nomes) != set(ids_perguntas):
-        raise ValueError("Os nomes das características estão incompletos.")
+    faltando = set(ids_perguntas) - set(nomes)
+    extras = set(nomes) - set(ids_perguntas)
+
+    if faltando or extras:
+        raise ValueError(
+            f"Características faltando: {sorted(faltando)}\n"
+            f"Características extras: {sorted(extras)}"
+        )
 
     penalidades = base.get("penalidades", {})
 

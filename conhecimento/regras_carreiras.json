@@ -78,6 +78,61 @@
         "gestao": 1,
         "mobile": 1,
         "nuvem": 2
+      },
+      "competencias_junior": {
+        "logica_programacao": {
+          "nome": "Lógica de programação",
+          "nivel_necessario": 3
+        },
+        "python": {
+          "nome": "Python",
+          "nivel_necessario": 3
+        },
+        "git": {
+          "nome": "Git e GitHub",
+          "nivel_necessario": 2
+        },
+        "banco_dados": {
+          "nome": "Banco de dados SQL",
+          "nivel_necessario": 3
+        },
+        "apis": {
+          "nome": "Desenvolvimento de APIs REST",
+          "nivel_necessario": 3
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "logica_programacao": {
+            "ordem": 1,
+            "conteudo": "Algoritmos, funções e estruturas de dados básicas"
+          },
+          "python": {
+            "ordem": 2,
+            "conteudo": "Python, orientação a objetos e tratamento de erros"
+          },
+          "git": {
+            "ordem": 3,
+            "conteudo": "Commits, branches e pull requests"
+          },
+          "banco_dados": {
+            "ordem": 4,
+            "conteudo": "Modelagem, consultas SQL e relacionamentos"
+          },
+          "apis": {
+            "ordem": 5,
+            "conteudo": "HTTP, JSON, rotas e FastAPI"
+          }
+        },
+        "certificacoes": [
+          "PCEP (Python) — opção introdutória",
+          "Fundamentos de computação em nuvem — opcional"
+        ],
+        "projetos": [
+          "Sistema CRUD com SQL",
+          "API REST de gerenciamento de tarefas",
+          "API com autenticação e testes"
+        ]
       }
     },
     "frontend": {
@@ -95,6 +150,60 @@
         "gestao": 2,
         "mobile": 2,
         "nuvem": 1
+      },
+      "competencias_junior": {
+        "html_css": {
+          "nome": "HTML e CSS",
+          "nivel_necessario": 3
+        },
+        "javascript": {
+          "nome": "JavaScript",
+          "nivel_necessario": 3
+        },
+        "git": {
+          "nome": "Git e GitHub",
+          "nivel_necessario": 2
+        },
+        "react": {
+          "nome": "React",
+          "nivel_necessario": 2
+        },
+        "ux": {
+          "nome": "Fundamentos de UX",
+          "nivel_necessario": 2
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "html_css": {
+            "ordem": 1,
+            "conteudo": "HTML semântico, CSS responsivo e acessibilidade"
+          },
+          "javascript": {
+            "ordem": 2,
+            "conteudo": "DOM, eventos, async/await e consumo de APIs"
+          },
+          "git": {
+            "ordem": 3,
+            "conteudo": "Versionamento e publicação de projetos"
+          },
+          "react": {
+            "ordem": 4,
+            "conteudo": "Componentes, estado, propriedades e rotas"
+          },
+          "ux": {
+            "ordem": 5,
+            "conteudo": "Usabilidade, protótipos e validação de interfaces"
+          }
+        },
+        "certificacoes": [
+          "Certificado de curso de acessibilidade web — opcional"
+        ],
+        "projetos": [
+          "Portfólio responsivo e acessível",
+          "Painel web que consome uma API",
+          "Protótipo validado com usuários"
+        ]
       }
     },
     "ciencia": {
@@ -112,6 +221,60 @@
         "gestao": 1,
         "mobile": 1,
         "nuvem": 2
+      },
+      "competencias_junior": {
+        "python": {
+          "nome": "Python para dados",
+          "nivel_necessario": 3
+        },
+        "estatistica": {
+          "nome": "Estatística básica",
+          "nivel_necessario": 3
+        },
+        "sql": {
+          "nome": "SQL",
+          "nivel_necessario": 2
+        },
+        "pandas": {
+          "nome": "Pandas e visualização",
+          "nivel_necessario": 3
+        },
+        "ml": {
+          "nome": "Machine Learning introdutório",
+          "nivel_necessario": 2
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "python": {
+            "ordem": 1,
+            "conteudo": "Sintaxe, notebooks e manipulação de arquivos"
+          },
+          "estatistica": {
+            "ordem": 2,
+            "conteudo": "Distribuições, correlação e testes básicos"
+          },
+          "sql": {
+            "ordem": 3,
+            "conteudo": "Consultas, junções e agregações"
+          },
+          "pandas": {
+            "ordem": 4,
+            "conteudo": "Limpeza, análise exploratória e gráficos"
+          },
+          "ml": {
+            "ordem": 5,
+            "conteudo": "Validação, métricas e modelos supervisionados"
+          }
+        },
+        "certificacoes": [
+          "Certificados introdutórios de análise de dados — opcionais"
+        ],
+        "projetos": [
+          "Análise exploratória de dados públicos",
+          "Modelo simples com métricas e relatório",
+          "Dashboard de indicadores"
+        ]
       }
     },
     "engenharia": {
@@ -129,6 +292,60 @@
         "gestao": 1,
         "mobile": 1,
         "nuvem": 3
+      },
+      "competencias_junior": {
+        "python": {
+          "nome": "Python para pipelines",
+          "nivel_necessario": 3
+        },
+        "sql": {
+          "nome": "SQL e modelagem",
+          "nivel_necessario": 3
+        },
+        "git": {
+          "nome": "Git e GitHub",
+          "nivel_necessario": 2
+        },
+        "etl": {
+          "nome": "ETL e qualidade de dados",
+          "nivel_necessario": 3
+        },
+        "orquestracao": {
+          "nome": "Orquestração e pipelines",
+          "nivel_necessario": 2
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "python": {
+            "ordem": 1,
+            "conteudo": "Scripts, arquivos e tratamento de exceções"
+          },
+          "sql": {
+            "ordem": 2,
+            "conteudo": "Modelagem relacional, consultas e índices"
+          },
+          "git": {
+            "ordem": 3,
+            "conteudo": "Fluxo de versionamento"
+          },
+          "etl": {
+            "ordem": 4,
+            "conteudo": "Extração, transformação, carga e validação"
+          },
+          "orquestracao": {
+            "ordem": 5,
+            "conteudo": "Agendamento, logs e monitoramento"
+          }
+        },
+        "certificacoes": [
+          "Certificações introdutórias de fundamentos de dados ou nuvem — opcionais"
+        ],
+        "projetos": [
+          "Pipeline ETL de dados abertos",
+          "Banco analítico com dados tratados",
+          "Pipeline agendado com logs e testes"
+        ]
       }
     },
     "seguranca": {
@@ -146,6 +363,60 @@
         "gestao": 2,
         "mobile": 1,
         "nuvem": 3
+      },
+      "competencias_junior": {
+        "redes": {
+          "nome": "Fundamentos de redes",
+          "nivel_necessario": 3
+        },
+        "linux": {
+          "nome": "Linux",
+          "nivel_necessario": 3
+        },
+        "programacao": {
+          "nome": "Scripts básicos",
+          "nivel_necessario": 2
+        },
+        "seguranca": {
+          "nome": "Fundamentos de segurança",
+          "nivel_necessario": 3
+        },
+        "monitoramento": {
+          "nome": "Análise de logs",
+          "nivel_necessario": 2
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "redes": {
+            "ordem": 1,
+            "conteudo": "TCP/IP, DNS, HTTP e roteamento básico"
+          },
+          "linux": {
+            "ordem": 2,
+            "conteudo": "Shell, permissões e processos"
+          },
+          "programacao": {
+            "ordem": 3,
+            "conteudo": "Automação segura com Python"
+          },
+          "seguranca": {
+            "ordem": 4,
+            "conteudo": "Controle de acesso, criptografia e ameaças"
+          },
+          "monitoramento": {
+            "ordem": 5,
+            "conteudo": "Eventos, alertas e resposta básica a incidentes"
+          }
+        },
+        "certificacoes": [
+          "CompTIA Security+ — referência opcional; verificar requisitos e custos"
+        ],
+        "projetos": [
+          "Laboratório defensivo de redes",
+          "Analisador de logs simulados",
+          "Checklist de segurança para aplicação própria"
+        ]
       }
     },
     "devops": {
@@ -163,6 +434,60 @@
         "gestao": 2,
         "mobile": 1,
         "nuvem": 4
+      },
+      "competencias_junior": {
+        "linux": {
+          "nome": "Linux e terminal",
+          "nivel_necessario": 3
+        },
+        "git": {
+          "nome": "Git e GitHub",
+          "nivel_necessario": 3
+        },
+        "scripts": {
+          "nome": "Automação com scripts",
+          "nivel_necessario": 3
+        },
+        "docker": {
+          "nome": "Containers Docker",
+          "nivel_necessario": 2
+        },
+        "cicd": {
+          "nome": "Integração e entrega contínua",
+          "nivel_necessario": 2
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "linux": {
+            "ordem": 1,
+            "conteudo": "Shell, usuários, serviços e processos"
+          },
+          "git": {
+            "ordem": 2,
+            "conteudo": "Branches, revisão e versionamento"
+          },
+          "scripts": {
+            "ordem": 3,
+            "conteudo": "Bash/Python e tarefas repetitivas"
+          },
+          "docker": {
+            "ordem": 4,
+            "conteudo": "Imagens, Dockerfiles e compose"
+          },
+          "cicd": {
+            "ordem": 5,
+            "conteudo": "Pipelines de build, teste e deploy"
+          }
+        },
+        "certificacoes": [
+          "Certificação introdutória de cloud — opcional"
+        ],
+        "projetos": [
+          "Pipeline CI de aplicação simples",
+          "Aplicação conteinerizada com Docker",
+          "Monitoramento básico de serviço"
+        ]
       }
     },
     "cloud": {
@@ -180,6 +505,60 @@
         "gestao": 2,
         "mobile": 1,
         "nuvem": 5
+      },
+      "competencias_junior": {
+        "redes": {
+          "nome": "Fundamentos de redes",
+          "nivel_necessario": 3
+        },
+        "linux": {
+          "nome": "Linux e servidores",
+          "nivel_necessario": 3
+        },
+        "cloud": {
+          "nome": "Fundamentos de nuvem",
+          "nivel_necessario": 3
+        },
+        "seguranca": {
+          "nome": "Segurança em nuvem",
+          "nivel_necessario": 2
+        },
+        "iac": {
+          "nome": "Infraestrutura como código",
+          "nivel_necessario": 2
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "redes": {
+            "ordem": 1,
+            "conteudo": "Sub-redes, DNS e segurança de rede"
+          },
+          "linux": {
+            "ordem": 2,
+            "conteudo": "Sistema operacional, serviços e permissões"
+          },
+          "cloud": {
+            "ordem": 3,
+            "conteudo": "IaaS, PaaS, regiões e custos"
+          },
+          "seguranca": {
+            "ordem": 4,
+            "conteudo": "IAM, menor privilégio e proteção de dados"
+          },
+          "iac": {
+            "ordem": 5,
+            "conteudo": "Declaração e versionamento de infraestrutura"
+          }
+        },
+        "certificacoes": [
+          "AWS Certified Cloud Practitioner ou Azure Fundamentals — opções introdutórias; verificar validade e custos"
+        ],
+        "projetos": [
+          "Hospedagem de aplicação simples",
+          "Desenho de arquitetura com custos estimados",
+          "Infraestrutura de teste definida como código"
+        ]
       }
     },
     "mobile": {
@@ -197,6 +576,60 @@
         "gestao": 1,
         "mobile": 5,
         "nuvem": 2
+      },
+      "competencias_junior": {
+        "logica": {
+          "nome": "Lógica de programação",
+          "nivel_necessario": 3
+        },
+        "linguagem": {
+          "nome": "Linguagem mobile",
+          "nivel_necessario": 3
+        },
+        "git": {
+          "nome": "Git e GitHub",
+          "nivel_necessario": 2
+        },
+        "interfaces": {
+          "nome": "Interfaces mobile",
+          "nivel_necessario": 3
+        },
+        "api": {
+          "nome": "Consumo de APIs e armazenamento",
+          "nivel_necessario": 2
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "logica": {
+            "ordem": 1,
+            "conteudo": "Algoritmos, funções e orientação a objetos"
+          },
+          "linguagem": {
+            "ordem": 2,
+            "conteudo": "Dart/Flutter ou Kotlin, conforme a trilha"
+          },
+          "git": {
+            "ordem": 3,
+            "conteudo": "Versionamento e organização de código"
+          },
+          "interfaces": {
+            "ordem": 4,
+            "conteudo": "Layouts, navegação e acessibilidade"
+          },
+          "api": {
+            "ordem": 5,
+            "conteudo": "HTTP, JSON e persistência local"
+          }
+        },
+        "certificacoes": [
+          "Certificados de cursos oficiais ou reconhecidos de Flutter/Kotlin — opcionais"
+        ],
+        "projetos": [
+          "Aplicativo de tarefas com armazenamento local",
+          "Aplicativo consumindo API pública",
+          "Aplicativo com testes e navegação"
+        ]
       }
     },
     "qa": {
@@ -214,6 +647,60 @@
         "gestao": 2,
         "mobile": 2,
         "nuvem": 2
+      },
+      "competencias_junior": {
+        "fundamentos": {
+          "nome": "Fundamentos de testes",
+          "nivel_necessario": 3
+        },
+        "casos": {
+          "nome": "Casos de teste",
+          "nivel_necessario": 3
+        },
+        "bugs": {
+          "nome": "Gestão de defeitos",
+          "nivel_necessario": 3
+        },
+        "api": {
+          "nome": "Testes de API",
+          "nivel_necessario": 2
+        },
+        "automacao": {
+          "nome": "Automação de testes",
+          "nivel_necessario": 2
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "fundamentos": {
+            "ordem": 1,
+            "conteudo": "Tipos de testes e critérios de qualidade"
+          },
+          "casos": {
+            "ordem": 2,
+            "conteudo": "Cenários, evidências e rastreabilidade"
+          },
+          "bugs": {
+            "ordem": 3,
+            "conteudo": "Relatórios claros e reprodução de bugs"
+          },
+          "api": {
+            "ordem": 4,
+            "conteudo": "HTTP, Postman e validações"
+          },
+          "automacao": {
+            "ordem": 5,
+            "conteudo": "Python/JavaScript e ferramentas de teste"
+          }
+        },
+        "certificacoes": [
+          "ISTQB CTFL — opção; verificar programa, requisitos e custos"
+        ],
+        "projetos": [
+          "Plano de testes para sistema CRUD",
+          "Coleção de testes de API",
+          "Suíte pequena de testes automatizados"
+        ]
       }
     },
     "produto": {
@@ -231,6 +718,60 @@
         "gestao": 5,
         "mobile": 2,
         "nuvem": 2
+      },
+      "competencias_junior": {
+        "problemas": {
+          "nome": "Identificação de problemas",
+          "nivel_necessario": 3
+        },
+        "usuarios": {
+          "nome": "Pesquisa com usuários",
+          "nivel_necessario": 3
+        },
+        "priorizacao": {
+          "nome": "Priorização de funcionalidades",
+          "nivel_necessario": 3
+        },
+        "metricas": {
+          "nome": "Métricas de produto",
+          "nivel_necessario": 2
+        },
+        "comunicacao": {
+          "nome": "Comunicação e roadmap",
+          "nivel_necessario": 3
+        }
+      },
+      "roadmap": {
+        "estudos": {
+          "problemas": {
+            "ordem": 1,
+            "conteudo": "Descoberta do problema e público-alvo"
+          },
+          "usuarios": {
+            "ordem": 2,
+            "conteudo": "Entrevistas, hipóteses e validação"
+          },
+          "priorizacao": {
+            "ordem": 3,
+            "conteudo": "Critérios de valor, esforço e impacto"
+          },
+          "metricas": {
+            "ordem": 4,
+            "conteudo": "Indicadores, funis e experimentos"
+          },
+          "comunicacao": {
+            "ordem": 5,
+            "conteudo": "Backlog, alinhamento e planejamento"
+          }
+        },
+        "certificacoes": [
+          "Certificados introdutórios de gestão ágil ou produto — opcionais"
+        ],
+        "projetos": [
+          "Estudo de caso com pesquisa de usuários",
+          "Backlog priorizado e roadmap",
+          "Dashboard de métricas de produto"
+        ]
       }
     }
   },
